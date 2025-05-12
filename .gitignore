@@ -7,3 +7,15 @@ inst/doc
 .httr-oauth
 .DS_Store
 .quarto
+._*
+.DS_Store
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+._*
+.DS_Store
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
