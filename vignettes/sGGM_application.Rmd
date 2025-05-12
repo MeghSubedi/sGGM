@@ -1,0 +1,51 @@
+---
+title: "sGGM Application Pipeline"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sGGM_application}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r setup}
+library(sGGM)
+# Load the example data 
+data("example_data")
+dim(example_data)
+# Get the Cluster Structure from example data 
+Modules<-Get_Clusters(example_data)
+
+# The cluster structure from correlation matrix 
+Modules$B_cor
+
+# The cluster structure from partial correlation matrix 
+Modules$B_Pcor
+```
+
+```{r}
+# Run Multiple Phenotype association tests without using network modules 
+# The output is a vector of length equal to number of SNPs 
+No_Pvalues<-Test_Without_Network(example_data,method = "ACAT")
+head(No_Pvalues)
+```
+
+```{r}
+# Run Multiple Phenotype test methods with network Modules and combine pvalues 
+Cor_Pval<-Test_With_Network(example_data,B=Modules$B_cor)
+head(Cor_Pval)
+```
+
+```{r}
+# Run Multiple Phenotype test methods with network Modules and combine pvalues
+Pcor_Pval<-Test_With_Network(example_data,B=Modules$B_Pcor)
+head(Pcor_Pval)
+```
+

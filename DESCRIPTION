@@ -1,0 +1,25 @@
+Package: sGGM
+Title: Network Construction using Sparse Gaussian Graphical Model based on GWAS Sumamry Statistics 
+Version: 1.0
+Authors@R: 
+    person("Megh", "Subedi", , "meghs@mtu.edu",role = c("aut", "cre"))
+Description: The package is designed to implement our appraoch sGGM, that cluster the Phenotype based on the partial correlation matrix and run multiple phenotype tests. 
+License: GPL
+Encoding: UTF-8
+Imports:
+    stats,
+    MASS,
+    dplyr,
+    aSPU,
+    GGMncv,
+    ACAT,
+    rlist
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
