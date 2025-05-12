@@ -13,12 +13,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# sGGM
+&nbsp;
+&nbsp;
 
-<!-- badges: start -->
-<!-- badges: end -->
-
-The goal of sGGM is to ...
+This package provides tools to construct sparse Phenotype-Phenotype Network (PPN) from GWAS summary statistics. It enables researchers to infer conditional dependencies among phenotypes by estimating sparse precision matrices using regularized methods. This package is particularly useful for identifying phenotype clusters,visualization of the network structure and multiple phenotype association tests. 
 
 ## Installation
 
@@ -31,25 +29,61 @@ pak::pak("MeghSubedi/sGGM")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+One built-in example dataset is included with the package to facilitate exploration of the sGGM framework. This dataset contains 10,000 rows and 40 columns, representing GWAS summary statistics for 10,000 SNPs across 40 phenotypes.
 
 ```{r example}
+# load the library
 library(sGGM)
-## basic example code
+
+# load the example data 
+data("example_data")
+dim(example_data)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+```{r}
+example_data[1:10,1:8]
+```
+Lets explore the cluster structure obtained from the correlation matrix and partial correlation matrix. Get_Clusters() function will return the list containing cluster structure from correlation matrix as well as from partial correlation matrix. 
 
 ```{r cars}
-summary(cars)
+# Detect clusters from correlation and partial correlation matrix 
+Modules<-Get_Clusters(example_data)
+
+# The cluster structure from the correlation matrix 
+Modules$B_cor
+```
+```{r pressure}
+# The cluster structure from partial correlation matrix 
+Modules$B_Pcor
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+Now, we can use these network modules to test the association of SNPs with multiple phenotype. 
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r}
+# Association test without considering Network modules 
+Pval<-Test_Without_Network(example_data,"Wald")
+# This will return vector of length 10000 equivalent to the number of SNPs 
+length(Pval)
+```
+```{r}
+head(Pval)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+```{r}
+# Association test considering network modules from correlation matrix 
+Pval<-Test_With_Network(example_data,Modules$B_cor,method="Wald")
+head(Pval)
+```
+```{r}
+dim(Pval)
+```
+
+The result is a data frame containing p-values from association tests conducted on phenotypes within each module. These p-values can then be combined to obtain a final p-value for the global association test.
+
+```{r}
+# Association test considering network modules from partial correlation matrix 
+Pval<-Test_With_Network(example_data,Modules$B_Pcor,"Wald")
+head(Pval)
+```
+
+
