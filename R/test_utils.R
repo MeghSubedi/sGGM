@@ -1,7 +1,5 @@
 
-#' Wald Test for Combining Z-scores across Correlated Traits
-#'
-#' Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+#' Cauchy combination of Pvalues from individual association tests.
 #' @param Zs The matrix of Z scores (rows are SNPs and column are traits)
 #' @returns A numeric vector of Pvalues rowwise(ie SNP)
 #' @export
@@ -38,9 +36,9 @@ ACAT_Pval<-function(Zs){
 # Wald
 #-----------------------
 
-#' Wald Test for Combining Z-scores across Correlated Traits
+#' Wald Test for testing association between SNPs and multiple traits.
 #'
-#' Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+#' Computes the Wald test p-values for rows of Z-scores matrix, accounting for correlation among traits.
 #' @param Zs The matrix of Z scores (rows are SNPs and column are traits)
 #'
 #' @returns A numeric vector vector of pvalues rowwise (per SNP)
@@ -67,9 +65,8 @@ Wald_Pval<-function(Zs){
 }
 
 
-#' PCFisher Test for Combining Z-scores across Correlated Traits
-#'
-#' Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+#' PCFisher test for testing an association between SNPs and multiple correlated traits
+#' Computes the PCFisher test p-values for rows of Z-scores matrix, accounting for correlation among traits.
 #' @param Zs a Matrix of Z scores (rows are SNPs and columns are traits)
 #' @returns A numeric vector of pvalues for each row (i.e SNPs)
 #' @export
@@ -109,10 +106,8 @@ PCFisher_Pval<-function(Zs){
 }
 
 
-#' HCLC Test for Combining Z-scores across Correlated Traits
-#'
-#' Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
-
+#' HCLC Test for testing an association between SNPs and multiple correlated traits.
+#' Computes the HCLC test p-values for rows of Z-scores matrix, accounting for correlation among traits.
 #' @param Zs The matrix of Z scores (rows are SNPs and column are traits)
 #' @returns A numeric vector of pvalues row-wise (SNP wise)
 #' @export
@@ -161,10 +156,8 @@ HCLC_Pval<-function(Zs){
 }
 
 
-#' Wald Test for Combining Z-scores across Correlated Traits
-#'
-#' Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
-#'
+#' OBrien test for testing an association between SNPs and multiple correlated traits.
+#' Computes the OBrien test p-values for rows of Z-scores matrix , accounting for correlation among traits.
 #' @param Zs The matrix of Z scores (rows are SNPs and column are traits)
 #' @returns A numeric vector of pvalues row-wise (SNP)
 #' @export

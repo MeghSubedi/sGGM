@@ -2,7 +2,8 @@
 % Please edit documentation in R/test_utils.R
 \name{PCFisher_Pval}
 \alias{PCFisher_Pval}
-\title{PCFisher Test for Combining Z-scores across Correlated Traits}
+\title{PCFisher test for testing an association between SNPs and multiple correlated traits
+Computes the PCFisher test p-values for rows of Z-scores matrix, accounting for correlation among traits.}
 \usage{
 PCFisher_Pval(Zs)
 }
@@ -13,7 +14,8 @@ PCFisher_Pval(Zs)
 A numeric vector of pvalues for each row (i.e SNPs)
 }
 \description{
-Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+PCFisher test for testing an association between SNPs and multiple correlated traits
+Computes the PCFisher test p-values for rows of Z-scores matrix, accounting for correlation among traits.
 }
 \examples{
 \dontrun{Zs<-sapply(1:5,function(x){rnorm(10)})

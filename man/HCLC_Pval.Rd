@@ -2,7 +2,8 @@
 % Please edit documentation in R/test_utils.R
 \name{HCLC_Pval}
 \alias{HCLC_Pval}
-\title{HCLC Test for Combining Z-scores across Correlated Traits}
+\title{HCLC Test for testing an association between SNPs and multiple correlated traits.
+Computes the HCLC test p-values for rows of Z-scores matrix, accounting for correlation among traits.}
 \usage{
 HCLC_Pval(Zs)
 }
@@ -13,7 +14,8 @@ HCLC_Pval(Zs)
 A numeric vector of pvalues row-wise (SNP wise)
 }
 \description{
-Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+HCLC Test for testing an association between SNPs and multiple correlated traits.
+Computes the HCLC test p-values for rows of Z-scores matrix, accounting for correlation among traits.
 }
 \examples{
 \dontrun{Zs<-sapply(1:5,function(x){rnorm(10)})

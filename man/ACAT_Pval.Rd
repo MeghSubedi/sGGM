@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_utils.R
 \name{ACAT_Pval}
 \alias{ACAT_Pval}
-\title{Wald Test for Combining Z-scores across Correlated Traits}
+\title{Cauchy combination of Pvalues from individual association tests.}
 \usage{
 ACAT_Pval(Zs)
 }
@@ -13,7 +13,7 @@ ACAT_Pval(Zs)
 A numeric vector of Pvalues rowwise(ie SNP)
 }
 \description{
-Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+Cauchy combination of Pvalues from individual association tests.
 }
 \examples{
 \dontrun{

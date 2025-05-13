@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_utils.R
 \name{Wald_Pval}
 \alias{Wald_Pval}
-\title{Wald Test for Combining Z-scores across Correlated Traits}
+\title{Wald Test for testing association between SNPs and multiple traits.}
 \usage{
 Wald_Pval(Zs)
 }
@@ -13,7 +13,7 @@ Wald_Pval(Zs)
 A numeric vector vector of pvalues rowwise (per SNP)
 }
 \description{
-Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+Computes the Wald test p-values for rows of Z-scores matrix, accounting for correlation among traits.
 }
 \examples{
 \dontrun{Zs<-sapply(1:5,function(x){rnorm(10)})

@@ -2,7 +2,8 @@
 % Please edit documentation in R/test_utils.R
 \name{OBrien_Pval}
 \alias{OBrien_Pval}
-\title{Wald Test for Combining Z-scores across Correlated Traits}
+\title{OBrien test for testing an association between SNPs and multiple correlated traits.
+Computes the OBrien test p-values for rows of Z-scores matrix , accounting for correlation among traits.}
 \usage{
 OBrien_Pval(Zs)
 }
@@ -13,7 +14,8 @@ OBrien_Pval(Zs)
 A numeric vector of pvalues row-wise (SNP)
 }
 \description{
-Computes the OBrien test p-values for rows of Z-scores, accounting for correlation among traits.
+OBrien test for testing an association between SNPs and multiple correlated traits.
+Computes the OBrien test p-values for rows of Z-scores matrix , accounting for correlation among traits.
 }
 \examples{
 \dontrun{Zs<-sapply(1:5,function(x){rnorm(10)})
