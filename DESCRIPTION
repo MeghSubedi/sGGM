@@ -25,3 +25,5 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/MeghSubedi/sGGM
 BugReports: https://github.com/MeghSubedi/sGGM/issues
+Remotes:
+    yaowuliu/ACAT
