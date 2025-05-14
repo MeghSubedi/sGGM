@@ -1,22 +1,24 @@
-.Rproj.user
-inst/doc
-/doc/
-/Meta/
+# macOS system files
+.DS_Store
+._*
+
+# RStudio files
+.Rproj.user/
 .Rhistory
-.Rdata
+.RData
+.Ruserdata
+
+# OAuth tokens
 .httr-oauth
-.DS_Store
-.quarto
-._*
-.DS_Store
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-._*
-.DS_Store
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-._*
+
+# Package build artifacts
+*.Rcheck/
+*.tar.gz
+
+# Documentation output
+inst/doc/
+doc/
+Meta/
+
+# Quarto artifacts
+.quarto/
