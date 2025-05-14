@@ -12,6 +12,7 @@ Imports:
     dplyr,
     aSPU,
     GGMncv,
+    ACAT,
     rlist
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

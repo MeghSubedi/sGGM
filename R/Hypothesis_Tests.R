@@ -61,8 +61,27 @@ Test_With_Network<-function(Zs,B,method="ACAT"){
 }
 
 
-#'@export
-Test_Without_Network<-function(Zs,method){
+
+
+
+
+#' Run an association test of SNPs with multiple phenotype without considering network modules
+#'
+#' @param Zs  The matrix of Z scores; rows are SNPs and columns are traits
+#' @param method method is the test method, There are five methods to check and default is ACAT
+#' We plan to include other methods in the future
+#'
+#' @returns A numeric vector of pvalues of length equal to number of SNPs
+#' @export
+#'
+#' @examples
+#' #load the example data
+#' data<-example_data
+#' Cluster<-Get_Clusters(data)
+#' pval_out<-Test_With_Network(Zs=data,B=Cluster$B_cor,method="ACAT")
+#' head(pval_out)
+#'
+Test_Without_Network<-function(Zs,method="ACAT"){
 
   Zs<-as.matrix(Zs)
 
