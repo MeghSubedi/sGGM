@@ -39,6 +39,10 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+      - name: Install remotes
+        run: Rscript -e 'install.packages("remotes")'
+      - name: Install package dependencies (including GitHub Remotes)
+        run: Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
