@@ -1,34 +1,62 @@
 
-#' Get Clusters from Correlation and Partial Correlation Matrices
+#' Get_Clusters
 #' Constructs clustering structures from both the correlation matrix and the
 #' partial correlation matrix estimated using sparse GGM.
-#'
 #' @param Zscores A numeric matrix of Z-scores (rows = SNPs, columns = traits).
+#' or correlation matrix or Correlation matrix of the Phenotypes
+#'
 #' @param penalty_function Penalty type for GGMncv (default: "lasso")
 #'
+#'@param n_rows This will be number of SNPs or number of Individuals if supplied
+#'the correlation matrix from phenotypes directly
+
 #' @returns A list with:
-#' B_cor`: Cluster matrix from correlation-based clustering
-#' B_Pcor`: Cluster matrix from partial correlation-based clustering
+#' B_cor`: Cluster matrix from correlation matrix
+#' B_Pcor`: Cluster matrix from partial correlation matrix
+
 #' @examples
 #' Z <- MASS::mvrnorm(100, mu = rep(0, 10), Sigma = diag(10))
 #' res <- Get_Clusters(Z)
 #' @export
 
-Get_Clusters <- function(Zscores, penalty_function = "lasso") {
+Get_Clusters <- function(Zscores, penalty_function = "lasso",n_rows=NULL) {
   # Validate Zscores input
   if (is.null(dim(Zscores)) || is.vector(Zscores)) {
     stop("Error: Zscores must be a two-dimensional matrix or array.\n ")
   }
+  # check if any entries are missing in correlation matrix or Z scores data
+  if (any(is.na(Zscores))) {
+    stop("Error:Input matrix contains NA values. Please handle them before proceeding.\n ")
+  }
+
+  # Check penalty function
   penalty_list<-c("atan","mcp","scad","exp","selo","log","lasso","sica","lq","adapt")
 
   if (!penalty_function %in% penalty_list) {
       stop(cat("\n penalty function  not found. current options are:", penalty_list,"\n"))
     }
 
-   Zscores <- as.matrix(Zscores)
+   Zscores<-as.matrix(Zscores)
 
-  # Estimate phenotype correlation matrix
-  Cor <- aSPU::estcov(Zscores)
+  # Check If correlation matrix supplied instead of full matrix
+  is_correlation_matrix <- function(mat) {
+    is.matrix(mat) &&
+      nrow(mat) == ncol(mat) &&
+      is.numeric(mat) &&
+      all(abs(mat - t(mat)) < .Machine$double.eps^0.5) &&
+      all(diag(mat) == 1)
+  }
+
+  if (is_correlation_matrix(Zscores)) {
+    Cor <- Zscores
+    if (is.null(n_rows)) {
+      stop("\n The number of rows 'n' must be provided when supplying a correlation matrix.\n ")
+    }
+    num_row <- n_rows
+  } else {
+    Cor <- aSPU::estcov(Zscores)
+    num_row <- nrow(Zscores)
+  }
 
   # Clustering based on correlation matrix
   D1 <- as.dist(1 - Cor)
@@ -39,7 +67,7 @@ Get_Clusters <- function(Zscores, penalty_function = "lasso") {
 
   # Estimate sparse partial correlation using GGMncv
   Model <- GGMncv::ggmncv(
-    R = Cor, n = nrow(Zscores),
+    R = Cor, n = num_row,
     penalty = penalty_function, n_lambda = 100,
     ic = "ebic", progress = FALSE
   )
@@ -57,7 +85,6 @@ Get_Clusters <- function(Zscores, penalty_function = "lasso") {
     B_Pcor = B_Pcor
   ))
 }
-
 
 #' Determine Optimal Number of Clusters Using Modularity
 #'
