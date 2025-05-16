@@ -2,23 +2,27 @@
 % Please edit documentation in R/CommunityDetection.R
 \name{Get_Clusters}
 \alias{Get_Clusters}
-\title{Get Clusters from Correlation and Partial Correlation Matrices
+\title{Get_Clusters
 Constructs clustering structures from both the correlation matrix and the
 partial correlation matrix estimated using sparse GGM.}
 \usage{
-Get_Clusters(Zscores, penalty_function = "lasso")
+Get_Clusters(Zscores, penalty_function = "lasso", n_rows = NULL)
 }
 \arguments{
-\item{Zscores}{A numeric matrix of Z-scores (rows = SNPs, columns = traits).}
+\item{Zscores}{A numeric matrix of Z-scores (rows = SNPs, columns = traits).
+or correlation matrix or Correlation matrix of the Phenotypes}
 
 \item{penalty_function}{Penalty type for GGMncv (default: "lasso")}
+
+\item{n_rows}{This will be number of SNPs or number of Individuals if supplied
+the correlation matrix from phenotypes directly}
 }
 \value{
 A list with:
-B_cor\verb{: Cluster matrix from correlation-based clustering B_Pcor}: Cluster matrix from partial correlation-based clustering
+B_cor\verb{: Cluster matrix from correlation matrix B_Pcor}: Cluster matrix from partial correlation matrix
 }
 \description{
-Get Clusters from Correlation and Partial Correlation Matrices
+Get_Clusters
 Constructs clustering structures from both the correlation matrix and the
 partial correlation matrix estimated using sparse GGM.
 }

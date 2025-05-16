@@ -3,7 +3,7 @@
 #' Constructs clustering structures from both the correlation matrix and the
 #' partial correlation matrix estimated using sparse GGM.
 #' @param Zscores A numeric matrix of Z-scores (rows = SNPs, columns = traits).
-#' or correlation matrix or Correlation matrix of the Phenotypes
+#' or correlation matrix of Z scores or Correlation matrix of the Phenotypes
 #'
 #' @param penalty_function Penalty type for GGMncv (default: "lasso")
 #'
